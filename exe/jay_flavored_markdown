@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'jay_flavored_markdown'
+
+puts "This is jay_flavored_markdown"

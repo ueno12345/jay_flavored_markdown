@@ -34,6 +34,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "kramdown", "~> 2.0"
   spec.add_dependency "kramdown-parser-gfm"
   spec.add_dependency "html-pipeline", "~> 2.14.0"
+  spec.add_dependency "rinku"
+  spec.add_dependency "gemoji"
+  spec.add_dependency "sanitize"
+  spec.add_dependency "rouge"
   spec.add_dependency "activesupport"
 
   spec.add_development_dependency "rake", "~> 13.0"

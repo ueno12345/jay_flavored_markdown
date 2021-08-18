@@ -572,7 +572,7 @@ module Kramdown
       def convert_li(el, indent)
         if el.value
           output = ' '*indent << "<#{el.type}" << html_attributes(el.attr) << ">"
-        elsif
+        else
           output = ' '*indent << "<#{el.type}" << " class=\"ul_list_item\"" << html_attributes(el.attr) << ">"
         end
 

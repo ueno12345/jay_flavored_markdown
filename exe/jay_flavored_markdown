@@ -1,4 +1,41 @@
 #!/usr/bin/env ruby
 require 'jay_flavored_markdown'
 
-puts "This is jay_flavored_markdown"
+output_type = :html
+
+while ARGV[0] =~ /^--(.*)/
+  ARGV.shift
+  case $1
+  when "output"
+    output_type = ARGV.shift
+  when "debug"
+    $JAY_DEBUG = true
+  when "version"
+    puts "#{JayFlavoredMarkdown::VERSION}"
+    return
+  when "help"
+    puts <<~"EOS"
+      Jay Flavored Markdown #{JayFlavoredMarkdown::VERSION}
+
+      Usage: jay_flavored_markdown [arguments]
+
+      Arguments:
+        --output [html]    Start in html mode (convert to html)
+        --debug            Start in debug mode (convert to object model)
+        --version          Show version
+        --help             Show help
+    EOS
+    return
+  end
+end
+
+if  output_type == "html"
+  puts <<-EOF
+    <style>
+      ol {list-style-type: none;}
+    </style>
+  EOF
+  puts JayFlavoredMarkdownConverter.new(gets(nil)).content
+else
+  puts JayFlavoredMarkdownToPlainTextConverter.new(gets(nil)).content
+end

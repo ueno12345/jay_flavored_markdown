@@ -1,41 +1,35 @@
 #!/usr/bin/env ruby
 require 'jay_flavored_markdown'
+require 'optparse'
 
-output_type = :html
+module JayFlavoredMarkdown
+  output_type = 'markdown'
 
-while ARGV[0] =~ /^--(.*)/
-  ARGV.shift
-  case $1
-  when "output"
-    output_type = ARGV.shift
-  when "debug"
-    $JAY_DEBUG = true
-  when "version"
-    puts "#{JayFlavoredMarkdown::VERSION}"
-    return
-  when "help"
-    puts <<~"EOS"
-      Jay Flavored Markdown #{JayFlavoredMarkdown::VERSION}
+  OptionParser.new do |opt|
+    opt.version = VERSION
+    opt.separator('Options:')
+    opt.on('-d', '--debug', 'Start in debug mode'){$JAY_DEBUG = true}
+    opt.on('--output=type', ['html','markdown'], 'html | markdown (default:markdown)'){|v| output_type = v}
+    opt.on_tail('-v', '--version', 'Show version'){puts opt.ver;exit}
+    opt.on_tail('-h', '--help', 'Show this message'){puts opt;exit}
 
-      Usage: jay_flavored_markdown [arguments]
-
-      Arguments:
-        --output [html]    Start in html mode (convert to html)
-        --debug            Start in debug mode (convert to object model)
-        --version          Show version
-        --help             Show help
-    EOS
-    return
+    begin
+      opt.parse!(ARGV)
+    rescue OptionParser::ParseError => e
+      puts e
+      exit 1
+    end
   end
-end
 
-if  output_type == "html"
-  puts <<-EOF
+  case output_type
+  when 'html'
+    puts <<-EOF
     <style>
       ol {list-style-type: none;}
     </style>
-  EOF
-  puts JayFlavoredMarkdownConverter.new(gets(nil)).content
-else
-  puts JayFlavoredMarkdownToPlainTextConverter.new(gets(nil)).content
+    EOF
+    puts JayFlavoredMarkdownConverter.new(gets(nil)).content
+  when 'markdown'
+    puts JayFlavoredMarkdownToPlainTextConverter.new(gets(nil)).content
+  end
 end

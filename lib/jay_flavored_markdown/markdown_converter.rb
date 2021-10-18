@@ -180,8 +180,8 @@ class MarkdownFeature
 end
 
 class ListItemFeature < MarkdownFeature
-  START_REGEXP = /^\s*[+-] /
-  INDENT = /^(\s*)/
+  START_REGEXP = /^\s*[*+-] /
+  INDENT = /^((\s\s)*)/
   FEATURE_TYPE = :item
 
   def inside_of_list?(string, current_indent)

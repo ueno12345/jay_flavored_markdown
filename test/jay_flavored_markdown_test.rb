@@ -7,9 +7,9 @@ class JayFlavoredMarkdownTest < Minitest::Test
     refute_nil ::JayFlavoredMarkdown::VERSION
   end
 
-  #行頭に１つのスペースを含む項番なしリストのネストの入力が，ネストではない項番なしリストの出力になる問題を検証するテスト
+  #行頭に１つのスペースを含む項番ありリストのネストが深くなってしまう問題を検証するテスト
   def test_that_it_should_get_nesting_of_unordered_list
-    assert_equal JayFlavoredMarkdownToPlainTextConverter.new("* aaa\n * aaa").content, "* aaa\n    * aaa"
+    assert_equal JayFlavoredMarkdownToPlainTextConverter.new("+ aaa\n + aaa").content, "(1) aaa\n(2) aaa"
   end
 
   #文字列の下行の '-' の入力が，2段階見出しの出力になる問題を検証するテスト

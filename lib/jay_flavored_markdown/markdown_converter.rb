@@ -1059,12 +1059,12 @@ class JayFlavoredMarkdownConverter
   private
 
   def context
-    whitelist = HTML::Pipeline::SanitizationFilter::WHITELIST.deep_dup
-    whitelist[:attributes][:all] << "data-linenum"
+    allowlist = HTML::Pipeline::SanitizationFilter::ALLOWLIST.deep_dup
+    allowlist[:attributes][:all] << "data-linenum"
     {
       input: "GFM",
       asset_root: 'https://github.githubassets.com/images/icons/',
-      whitelist: whitelist,
+      allowlist: allowlist,
       syntax_highlighter: :rouge,
       syntax_highlighter_opts: {inline_theme: true, line_numbers: true, code_class: 'codehilite'}
     }
@@ -1102,13 +1102,13 @@ class JayFlavoredMarkdownToPlainTextConverter
   private
 
   def context
-    whitelist = HTML::Pipeline::SanitizationFilter::WHITELIST.deep_dup
-    whitelist[:attributes][:all] << "data-linenum"
+    allowlist = HTML::Pipeline::SanitizationFilter::ALLOWLIST.deep_dup
+    allowlist[:attributes][:all] << "data-linenum"
     {
       input: "GFM",
       # hard_wrap: false,
       asset_root: 'https://assets-cdn.github.com/images/icons/',
-      whitelist: whitelist
+      allowlist: allowlist
     }
   end
 

@@ -577,7 +577,11 @@ module Kramdown
         end
 
         if el.value.respond_to?(:mark)
-          output << "<span class=\"bullet-list-marker\">(#{el.value.mark})</span>"
+          if el.value.mark.nil?
+            output << "<span class=\"bullet-list-marker\">● &nbsp;</span>"
+          else
+            output << "<span class=\"bullet-list-marker\">(#{el.value.mark})</span>"
+          end
         end
 
         res = inner(el, indent)

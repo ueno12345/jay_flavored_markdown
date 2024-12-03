@@ -10,7 +10,8 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "JayFlavoredMarkdown Converter"
   spec.description   = "JayFlavoredMarkdown Converter"
-  spec.homepage      = "https://github.com/nomlab/jay_flavored_markdown"
+#  spec.homepage      = "https://github.com/nomlab/jay_flavored_markdown"
+  spec.homepage      = "https://github.com/ueno12345/jay_flavored_markdown"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
 
@@ -38,7 +39,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "gemoji"
   spec.add_dependency "sanitize"
   spec.add_dependency "rouge"
-  spec.add_dependency "activesupport", "~> 7.0.5.1"
+  #spec.add_dependency "activesupport", "~> 7.0.5.1"
+  spec.add_dependency "activesupport", "~> 7.2.2"
 
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "minitest", "~> 5.0"
